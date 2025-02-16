@@ -1,0 +1,490 @@
+body {
+    margin: 0;
+    font-family: "Montserrat", Arial, sans-serif; /* Додавання Montserrat зі збереженням запасного шрифту Arial */
+}
+
+/* Навбар */
+.navbar {
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+    width: 33vw; /* приблизно третина екрану */
+    padding: 10px; /* Зменшено для більш компактного вигляду */
+    border-radius: 12px;
+    bottom: 10px; /* відступ від низу */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: whitesmoke;
+    color: black;
+    z-index: 10; /* Поверх інших елементів */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Додано тінь для кращого вигляду */
+}
+
+/* Стиль для елементів навбару */
+.navbar-item {
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    border-radius: 8px;
+    border: 1px solid #4caf50;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Ефект при наведенні */
+.navbar-item:hover {
+    background-color: #4caf50;
+    color: white;
+    border-color: #4caf50;
+}
+
+/* Видаляє зайвий нижній відступ у останнього елемента */
+.navbar-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Стиль для мапи */
+#map {
+    width: 100vw;
+    height: calc(100vh - 60px); /* Враховано простір для навбару */
+}
+
+/* Контейнер для локацій */
+.locations-container {
+    max-width: 500px;
+    margin: 0 auto;
+    margin-bottom: 20vh;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1,
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+
+    font-size: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.suggestions {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.suggestions li {
+    padding: 8px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.suggestions li:hover {
+    background-color: #eee;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+/* Список локацій */
+.location-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Встановлено на колонку */
+    gap: 20px;
+}
+
+.location-item {
+    width: 90%;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center; /* Вирівнювання елементів по вертикалі */
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.location-link {
+    text-decoration: none;
+}
+
+.location-item:hover {
+    transform: translateY(-5px);
+}
+
+.checkbox-container {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 25px; /* Між чекбоксом та текстом */
+}
+
+.checkbox-container input {
+    opacity: 0;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.checkbox-container input:checked + .checkmark {
+    background-color: #4caf50;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked + .checkmark:after {
+    display: block;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.location-info {
+    text-align: left; /* Текст локації вирівнюється по лівому краю */
+    color: #333;
+}
+
+.location-info h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.location-info p {
+    font-size: 14px;
+    color: #666;
+}
+
+.location-list .fill-percentage {
+    background-color: #d4edda; /* Світло-зелений фон */
+    color: #155724; /* Темно-зелений текст */
+    padding: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.delete-button {
+    margin-left: auto; /* Відсуньте кнопку до правого краю */
+    width: 20%;
+    background-color: transparent;
+    border: none;
+    color: black;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-button:hover {
+    background-color: red;
+}
+
+/* Стилі для сторінки LocationDetails */
+
+/* Загальні стилі для контейнера */
+.location-details {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Стилі для заголовка */
+.location-details h1 {
+    font-size: 2.5em; /* Збільшений розмір шрифту */
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Стилі для тексту */
+.location-details p {
+    font-size: 1.2em; /* Збільшений розмір шрифту */
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.location-details strong {
+    color: #333;
+}
+
+/* Стилі для поля введення */
+.location-details input[type="number"] {
+    padding: 10px; /* Збільшено padding */
+    margin-right: 10px;
+    border-radius: 6px; /* Збільшено border-radius */
+    border: 1px solid #ccc;
+    font-size: 1.2em; /* Збільшено розмір шрифту */
+    width: 100px;
+}
+
+/* Загальні стилі для кнопок */
+.location-details button {
+    color: #fff;
+    border: none;
+    padding: 20px 24px; /* Збільшено padding */
+    font-size: 1.2em; /* Збільшено розмір шрифту */
+    cursor: pointer;
+    border-radius: 6px; /* Збільшено border-radius */
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s ease;
+
+    width: 20%;
+}
+
+/* Стиль для кнопки оновлення */
+.update-button {
+    background-color: #28a745; /* Зелений колір для кнопки оновлення */
+}
+
+.update-button:hover {
+    background-color: #218838; /* Темно-зелений колір при наведенні */
+}
+
+/* Стиль для кнопки видалення */
+.delete-button-location-page {
+    background-color: #dc3545;
+}
+
+/* Ефект при наведенні для кнопки видалення */
+.delete-button-location-page:hover {
+    background-color: #c82333;
+}
+
+/* Виділення відсотка заповнення */
+.location-details .fill-percentage {
+    background-color: #d4edda; /* Світло-зелений фон */
+    color: #155724; /* Темно-зелений текст */
+    padding: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.fill-percentage-background {
+    background-color: #d4edda;
+    border-radius: 20px;
+    width: auto;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.location-details hr {
+    width: 50%;
+}
+
+.success-message {
+    color: greenyellow;
+}
+
+/* Стилі для контейнера сторінки login */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Заголовок сторінки login */
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Загальні стилі для форми */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+/* Стиль для кнопки login */
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.login-container button:hover {
+    background-color: #45a049;
+}
+
+/* Стиль для повідомлень про помилки */
+.login-container .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Стилі для контейнера сторінки register */
+.register-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Заголовок сторінки register */
+.register-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Загальні стилі для форми */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+/* Стиль для кнопки register */
+.register-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.register-container button:hover {
+    background-color: #45a049;
+}
+
+/* Стиль для повідомлень про помилки */
+.register-container .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+@media (max-width: 800px) {
+    .navbar {
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        display: flex;
+        justify-content: space-around;
+        background-color: white;
+        padding: 10px 0;
+        color: black;
+    }
+
+    .location-details button {
+        width: 50%;
+    }
+}
