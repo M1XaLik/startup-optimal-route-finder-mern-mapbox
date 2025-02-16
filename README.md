@@ -1,7 +1,5 @@
 # Українська:
 
-## Проєкт
-
 Проєкт був зібраний за кілька днів на колінці, тут немає ніякої магії та оптимізації, до речі, теж. 🙂
 
 ### Розгортання
@@ -11,8 +9,6 @@
 ---
 
 # English:
-
-## Project
 
 The project was put together in a few days on the fly, so there's no magic or optimization here, by the way, either. 🙂
 
