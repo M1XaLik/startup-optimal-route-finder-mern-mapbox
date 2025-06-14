@@ -1,5 +1,10 @@
 ![Сертифікат про перемогу](docs/startup-contest-certificate.jpg)
 
+## TEAM:
+- [Shymonyuk Mykhailo](https://github.com/M1XaLik)
+- [Natalia Pys'](https://github.com/bubick123)
+- [Brazhnyk Kateryna](https://github.com/CHARDETT)
+
 # Українська:
 
 Проєкт був зібраний за кілька днів на колінці, тут немає ніякої магії, оптимізації, до речі, теж. 🙂
